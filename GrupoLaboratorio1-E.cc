@@ -1,30 +1,58 @@
 #include <iostream>
+#include <string>
 
+struct Producto {
+    std::string nombreProducto;
+    int stock = 0;
+};
 
+void IngresarStock(int &stock, int cantidad); 
+void RetirarStock(int *stock, int cantidad); 
 
+int main() {
+    int cantidad;
+    Producto pro;
 
-//Funciones
-void RetirarStock (int *stock, int cantidad);
+    std::cout << "Bienevnido, ingrese un producto: ";
+    std::cin >> pro.nombreProducto;
 
+    do {
+        std::cout << "Cantidad del producto que decea ingresar (Minimo 50): ";
+        std::cin >> cantidad;
+        if (cantidad < 50) {
+            std::cout << "Error: La cantidad no debe ser menor a 50 unidades del producto.\n" << std::endl;
+        }
+    } while (cantidad < 50);
 
-int main(){
+    pro.stock = 0; 
+    IngresarStock(pro.stock, cantidad);
 
+    std::cout << "\n      Producto registrado       " << std::endl;
+    std::cout << "Nombre: " << pro.nombreProducto << std::endl;
+    std::cout << "Stock total: " << pro.stock << std::endl;
 
+    int Stockretiro = 0;
+    std::cout << "¿Cuanta cantidad de stock deseas retirar: ";
+    std::cin >> Stockretiro;
 
-   int Stockretiro = 0; 
-    std::cout << "\n¿Cuanta cantidad de stock deseas retirar ?: ";
-    std::cin >> Stockretiro; 
+    // AQUÍ ESTÁ EL CAMBIO CLAVE: Se usa '>' en lugar de '>='
+    if (Stockretiro > pro.stock || Stockretiro <= 0) {
+        std::cout << "Error: Cantidad invalida o no hay suficiente stock." << std::endl;
+    } else {
+        RetirarStock(&pro.stock, Stockretiro);
+        std::cout << "\n Retiro exitoso " << std::endl;
+        std::cout << "Stock restante: " << pro.stock << std::endl;
+    }
 
-   
-        RetirarStock(&pro.cantidad, Stockretiro); 
-  
     return 0;
 }
 
+void IngresarStock(int &stock, int cantidad) {
+    stock += cantidad; 
+}
 
-
-// Paso por puntero
-void RetirarStock(int *stock, int cantidad)
-{
-    *stock -= cantidad;
+void RetirarStock(int *stock, int cantidad) {
+    if (stock != nullptr) {
+        *stock -= cantidad; 
+    }
 }
