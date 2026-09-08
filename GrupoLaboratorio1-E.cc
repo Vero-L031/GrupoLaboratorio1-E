@@ -1,7 +1,9 @@
 #include <iostream>
 #include <string>
 
-struct Producto {
+void ConsultarStock(int stock); 
+
+struct Producto{
     std::string nombreProducto;
     int stock = 0;
 };
@@ -35,7 +37,7 @@ int main() {
     std::cout << "¿Cuanta cantidad de stock deseas retirar: ";
     std::cin >> Stockretiro;
 
-    // AQUÍ ESTÁ EL CAMBIO CLAVE: Se usa '>' en lugar de '>='
+    
     if (Stockretiro > pro.stock || Stockretiro <= 0) {
         std::cout << "Error: Cantidad invalida o no hay suficiente stock." << std::endl;
     } else {
